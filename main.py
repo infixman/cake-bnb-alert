@@ -13,6 +13,7 @@ TG_USER_ID = os.getenv("TG_USER_ID")
 TG_USER_NAME = os.getenv("TG_USER_NAME")
 LOW_RATE = float(os.getenv("LOW_RATE"))
 HIGH_RATE = float(os.getenv("HIGH_RATE"))
+SLEEP_SCEONDS = 5
 
 
 def get_cakebnb():
@@ -61,8 +62,9 @@ def main():
     # send_msg(TG_USER_ID, f"TG_USER_NAME:{TG_USER_NAME}")
     # send_msg(TG_USER_ID, f"LOW_RATE:{LOW_RATE}")
     # send_msg(TG_USER_ID, f"HIGH_RATE:{HIGH_RATE}")
+    loop_range = int((60 * 60) / SLEEP_SCEONDS)  # 1 hour
     try:
-        while True:
+        for _ in range(loop_range):
             cake, bnb, cakebnb = get_cakebnb()
             if cake != -1 and bnb != -1:
                 if cakebnb >= HIGH_RATE:
