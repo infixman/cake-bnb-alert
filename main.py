@@ -60,14 +60,16 @@ def send_msg(chat_id: str, text: str):
 
 
 def main():
-    # send_msg(TG_USER_ID, f"FTX_KEY:{FTX_KEY}")
-    # send_msg(TG_USER_ID, f"FTX_SECRET:{FTX_SECRET}")
-    # send_msg(TG_USER_ID, f"TG_BOT_TOKEN:{TG_BOT_TOKEN}")
-    # send_msg(TG_USER_ID, f"TG_GROUP_ID:{TG_GROUP_ID}")
-    # send_msg(TG_USER_ID, f"TG_USER_ID:{TG_USER_ID}")
-    # send_msg(TG_USER_ID, f"TG_USER_NAME:{TG_USER_NAME}")
-    # send_msg(TG_USER_ID, f"LOW_RATE:{LOW_RATE}")
-    # send_msg(TG_USER_ID, f"HIGH_RATE:{HIGH_RATE}")
+    if True:
+        send_msg(TG_DEBUG_GROUP_ID, f"FTX_KEY:{FTX_KEY}")
+        send_msg(TG_DEBUG_GROUP_ID, f"FTX_SECRET:{FTX_SECRET}")
+        send_msg(TG_DEBUG_GROUP_ID, f"TG_BOT_TOKEN:{TG_BOT_TOKEN}")
+        send_msg(TG_DEBUG_GROUP_ID, f"TG_DEBUG_GROUP_ID:{TG_DEBUG_GROUP_ID}")
+        send_msg(TG_DEBUG_GROUP_ID, f"TG_GROUP_ID:{TG_GROUP_ID}")
+        send_msg(TG_DEBUG_GROUP_ID, f"TG_USER_ID:{TG_USER_ID}")
+        send_msg(TG_DEBUG_GROUP_ID, f"TG_USER_NAME:{TG_USER_NAME}")
+        send_msg(TG_DEBUG_GROUP_ID, f"LOW_RATE:{LOW_RATE}")
+        send_msg(TG_DEBUG_GROUP_ID, f"HIGH_RATE:{HIGH_RATE}")
     loop_range = int((60 * 60) / SLEEP_SCEONDS)  # 1 hour
     try:
         for _ in range(loop_range):
