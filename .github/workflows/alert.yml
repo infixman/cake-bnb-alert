@@ -1,4 +1,4 @@
-name: Daily Sign
+name: Cake-Bnb-Alert
 
 on:
   push:
