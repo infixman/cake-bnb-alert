@@ -15,6 +15,7 @@ TG_USER_NAME = os.getenv("TG_USER_NAME")
 LOW_RATE = float(os.getenv("LOW_RATE"))
 HIGH_RATE = float(os.getenv("HIGH_RATE"))
 SLEEP_SCEONDS = 5
+SEND_ENV = False
 
 
 def get_cakebnb():
@@ -60,18 +61,19 @@ def send_msg(chat_id: str, text: str):
 
 
 def main():
-    if False:
-        send_msg(TG_DEBUG_GROUP_ID, f"FTX_KEY:{FTX_KEY}")
-        send_msg(TG_DEBUG_GROUP_ID, f"FTX_SECRET:{FTX_SECRET}")
-        send_msg(TG_DEBUG_GROUP_ID, f"TG_BOT_TOKEN:{TG_BOT_TOKEN}")
-        send_msg(TG_DEBUG_GROUP_ID, f"TG_DEBUG_GROUP_ID:{TG_DEBUG_GROUP_ID}")
-        send_msg(TG_DEBUG_GROUP_ID, f"TG_GROUP_ID:{TG_GROUP_ID}")
-        send_msg(TG_DEBUG_GROUP_ID, f"TG_USER_ID:{TG_USER_ID}")
-        send_msg(TG_DEBUG_GROUP_ID, f"TG_USER_NAME:{TG_USER_NAME}")
-        send_msg(TG_DEBUG_GROUP_ID, f"LOW_RATE:{LOW_RATE}")
-        send_msg(TG_DEBUG_GROUP_ID, f"HIGH_RATE:{HIGH_RATE}")
-    # loop_range = int((60 * 60) / SLEEP_SCEONDS)  # 1 hour
+    if SEND_ENV:
+        send_msg(TG_USER_ID, f"FTX_KEY:{FTX_KEY}")
+        send_msg(TG_USER_ID, f"FTX_SECRET:{FTX_SECRET}")
+        send_msg(TG_USER_ID, f"TG_BOT_TOKEN:{TG_BOT_TOKEN}")
+        send_msg(TG_USER_ID, f"TG_DEBUG_GROUP_ID:{TG_DEBUG_GROUP_ID}")
+        send_msg(TG_USER_ID, f"TG_GROUP_ID:{TG_GROUP_ID}")
+        send_msg(TG_USER_ID, f"TG_USER_ID:{TG_USER_ID}")
+        send_msg(TG_USER_ID, f"TG_USER_NAME:{TG_USER_NAME}")
+        send_msg(TG_USER_ID, f"LOW_RATE:{LOW_RATE}")
+        send_msg(TG_USER_ID, f"HIGH_RATE:{HIGH_RATE}")
+
     try:
+        # loop_range = int((60 * 60) / SLEEP_SCEONDS)  # 1 hour
         # for _ in range(loop_range):
         while True:
             cake, bnb, cakebnb = get_cakebnb()
@@ -106,8 +108,8 @@ def main():
                         f"CAKE/BNB 價格比 {cakebnb} ({cake}/{bnb})",
                     )
             time.sleep(5)
-    except:
-        pass
+    except Exception as e:
+        send_msg(TG_USER_ID, f"[ERROR] main, {e}")
 
 
 if __name__ == "__main__":
