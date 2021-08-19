@@ -38,32 +38,36 @@ def get_ftx_price(name: str):
                 return robj["result"]["price"]
             else:
                 return -1
-    except:
+        else:
+            send_msg(
+                TG_USER_ID, f"[ERROR] ask {name} price got ({r.status_code}) {r.text}"
+            )
+    except Exception as e:
+        send_msg(TG_USER_ID, f"[ERROR] ask {name} price got {e}")
         return -1
 
 
-def main():
+def send_msg(chat_id: str, text: str):
     bot = Bot(token=TG_BOT_TOKEN)
+    bot.send_message(chat_id=chat_id, text=text)
+
+
+def main():
     try:
         cake, bnb, cakebnb = get_cakebnb()
-        if cakebnb >= HIGH_RATE:
-            bot.send_message(
-                text=f"CAKE/BNB 價格比到達 {cakebnb} ({cake}/{bnb})\r\n建議平倉\r\n{TG_USER_NAME}",
-                chat_id=TG_GROUP_ID,
-            )
-            bot.send_message(
-                text=f"CAKE/BNB 價格比到達 {cakebnb} ({cake}/{bnb})\r\n建議平倉",
-                chat_id=TG_USER_ID,
-            )
-        elif cakebnb <= LOW_RATE:
-            bot.send_message(
-                text=f"CAKE/BNB 價格比到達 {cakebnb} ({cake}/{bnb})\r\n建議加倉\r\n{TG_USER_NAME}",
-                chat_id=TG_GROUP_ID,
-            )
-            bot.send_message(
-                text=f"CAKE/BNB 價格比到達 {cakebnb} ({cake}/{bnb})\r\n建議加倉",
-                chat_id=TG_USER_ID,
-            )
+        if cake != -1 and bnb != -1:
+            if cakebnb >= HIGH_RATE:
+                send_msg(
+                    TG_GROUP_ID,
+                    f"CAKE/BNB 價格比到達 {cakebnb} ({cake}/{bnb})\r\n建議平倉\r\n{TG_USER_NAME}",
+                )
+                send_msg(TG_USER_ID, f"CAKE/BNB 價格比到達 {cakebnb} ({cake}/{bnb})\r\n建議平倉")
+            elif cakebnb <= LOW_RATE:
+                send_msg(
+                    TG_GROUP_ID,
+                    f"CAKE/BNB 價格比到達 {cakebnb} ({cake}/{bnb})\r\n建議加倉\r\n{TG_USER_NAME}",
+                )
+                send_msg(TG_USER_ID, f"CAKE/BNB 價格比到達 {cakebnb} ({cake}/{bnb})\r\n建議加倉")
     except:
         pass
 
