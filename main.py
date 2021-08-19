@@ -8,6 +8,7 @@ from telegram import Bot
 FTX_KEY = os.getenv("FTX_KEY")
 FTX_SECRET = os.getenv("FTX_SECRET")
 TG_BOT_TOKEN = os.getenv("TG_BOT_TOKEN")
+TG_DEBUG_GROUP_ID = os.getenv("TG_DEBUG_GROUP_ID")
 TG_GROUP_ID = os.getenv("TG_GROUP_ID")
 TG_USER_ID = os.getenv("TG_USER_ID")
 TG_USER_NAME = os.getenv("TG_USER_NAME")
@@ -43,8 +44,13 @@ def get_ftx_price(name: str):
             send_msg(
                 TG_USER_ID, f"[ERROR] ask {name} price got ({r.status_code}) {r.text}"
             )
+            send_msg(
+                TG_DEBUG_GROUP_ID,
+                f"[ERROR] ask {name} price got ({r.status_code}) {r.text}",
+            )
     except Exception as e:
         send_msg(TG_USER_ID, f"[ERROR] ask {name} price got {e}")
+        send_msg(TG_DEBUG_GROUP_ID, f"[ERROR] ask {name} price got {e}")
         return -1
 
 
@@ -75,6 +81,10 @@ def main():
                     send_msg(
                         TG_USER_ID, f"CAKE/BNB 價格比到達 {cakebnb} ({cake}/{bnb})\r\n建議平倉"
                     )
+                    send_msg(
+                        TG_DEBUG_GROUP_ID,
+                        f"CAKE/BNB 價格比到達 {cakebnb} ({cake}/{bnb})\r\n建議平倉",
+                    )
                 elif cakebnb <= LOW_RATE:
                     send_msg(
                         TG_GROUP_ID,
@@ -82,6 +92,15 @@ def main():
                     )
                     send_msg(
                         TG_USER_ID, f"CAKE/BNB 價格比到達 {cakebnb} ({cake}/{bnb})\r\n建議加倉"
+                    )
+                    send_msg(
+                        TG_DEBUG_GROUP_ID,
+                        f"CAKE/BNB 價格比到達 {cakebnb} ({cake}/{bnb})\r\n建議加倉",
+                    )
+                else:
+                    send_msg(
+                        TG_DEBUG_GROUP_ID,
+                        f"CAKE/BNB 價格比 {cakebnb} ({cake}/{bnb})",
                     )
             time.sleep(5)
     except:
