@@ -62,7 +62,7 @@ def main():
     # send_msg(TG_USER_ID, f"LOW_RATE:{LOW_RATE}")
     # send_msg(TG_USER_ID, f"HIGH_RATE:{HIGH_RATE}")
     try:
-        for _ in range(60):
+        while True:
             cake, bnb, cakebnb = get_cakebnb()
             if cake != -1 and bnb != -1:
                 if cakebnb >= HIGH_RATE:
@@ -81,8 +81,7 @@ def main():
                     send_msg(
                         TG_USER_ID, f"CAKE/BNB 價格比到達 {cakebnb} ({cake}/{bnb})\r\n建議加倉"
                     )
-            time.sleep(10)
-            send_msg(TG_USER_ID, "sleep")
+            time.sleep(5)
     except:
         pass
 
