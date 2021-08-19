@@ -60,7 +60,7 @@ def send_msg(chat_id: str, text: str):
 
 
 def main():
-    if True:
+    if False:
         send_msg(TG_DEBUG_GROUP_ID, f"FTX_KEY:{FTX_KEY}")
         send_msg(TG_DEBUG_GROUP_ID, f"FTX_SECRET:{FTX_SECRET}")
         send_msg(TG_DEBUG_GROUP_ID, f"TG_BOT_TOKEN:{TG_BOT_TOKEN}")
