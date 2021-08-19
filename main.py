@@ -70,9 +70,10 @@ def main():
         send_msg(TG_DEBUG_GROUP_ID, f"TG_USER_NAME:{TG_USER_NAME}")
         send_msg(TG_DEBUG_GROUP_ID, f"LOW_RATE:{LOW_RATE}")
         send_msg(TG_DEBUG_GROUP_ID, f"HIGH_RATE:{HIGH_RATE}")
-    loop_range = int((60 * 60) / SLEEP_SCEONDS)  # 1 hour
+    # loop_range = int((60 * 60) / SLEEP_SCEONDS)  # 1 hour
     try:
-        for _ in range(loop_range):
+        # for _ in range(loop_range):
+        while True:
             cake, bnb, cakebnb = get_cakebnb()
             if cake != -1 and bnb != -1:
                 if cakebnb >= HIGH_RATE:
