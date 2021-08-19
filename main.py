@@ -78,35 +78,20 @@ def main():
         while True:
             cake, bnb, cakebnb = get_cakebnb()
             if cake != -1 and bnb != -1:
-                if cakebnb >= HIGH_RATE:
+                msg = f"CAKE/BNB 價格比 {cakebnb} ({cake}/{bnb})"
+
+                if cakebnb <= LOW_RATE:
+                    msg = "{msg}\r\n建議加倉"
+                elif cakebnb >= HIGH_RATE:
+                    msg = "{msg}\r\n建議平倉"
+
+                if cakebnb <= LOW_RATE or cakebnb >= HIGH_RATE:
                     send_msg(
                         TG_GROUP_ID,
-                        f"CAKE/BNB 價格比到達 {cakebnb} ({cake}/{bnb})\r\n建議平倉\r\n{TG_USER_NAME}",
+                        f"{msg}\r\n{TG_USER_NAME}",
                     )
-                    send_msg(
-                        TG_USER_ID, f"CAKE/BNB 價格比到達 {cakebnb} ({cake}/{bnb})\r\n建議平倉"
-                    )
-                    send_msg(
-                        TG_DEBUG_GROUP_ID,
-                        f"CAKE/BNB 價格比到達 {cakebnb} ({cake}/{bnb})\r\n建議平倉",
-                    )
-                elif cakebnb <= LOW_RATE:
-                    send_msg(
-                        TG_GROUP_ID,
-                        f"CAKE/BNB 價格比到達 {cakebnb} ({cake}/{bnb})\r\n建議加倉\r\n{TG_USER_NAME}",
-                    )
-                    send_msg(
-                        TG_USER_ID, f"CAKE/BNB 價格比到達 {cakebnb} ({cake}/{bnb})\r\n建議加倉"
-                    )
-                    send_msg(
-                        TG_DEBUG_GROUP_ID,
-                        f"CAKE/BNB 價格比到達 {cakebnb} ({cake}/{bnb})\r\n建議加倉",
-                    )
-                else:
-                    send_msg(
-                        TG_DEBUG_GROUP_ID,
-                        f"CAKE/BNB 價格比 {cakebnb} ({cake}/{bnb})",
-                    )
+                    send_msg(TG_USER_ID, msg)
+                send_msg(TG_DEBUG_GROUP_ID, msg)
             time.sleep(5)
     except Exception as e:
         send_msg(TG_USER_ID, f"[ERROR] main, {e}")
