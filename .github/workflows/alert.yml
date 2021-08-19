@@ -24,7 +24,7 @@ jobs:
     - name: Run Python Script
       env:
         FTX_KEY: ${{ secrets.FTX_KEY }}
-        FTX_TOKEN: ${{ secrets.FTX_TOKEN }}
+        FTX_SECRET: ${{ secrets.FTX_SECRET }}
         TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
         TG_GROUP_ID: ${{ secrets.TG_GROUP_ID }}
         TG_USER_ID: ${{ secrets.TG_USER_ID }}
