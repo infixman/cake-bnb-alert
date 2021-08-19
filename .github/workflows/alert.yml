@@ -1,0 +1,35 @@
+name: Daily Sign
+
+on:
+  push:
+  schedule:
+    - cron: '* * * * *'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@main
+    - uses: actions/cache@v2
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+    - name: Install requirements
+      run: |
+        pip install -r requirements.txt
+    - name: Run Python Script
+      env:
+        FTX_KEY: ${{ secrets.FTX_KEY }}
+        FTX_TOKEN: ${{ secrets.FTX_TOKEN }}
+        TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+        TG_GROUP_ID: ${{ secrets.TG_GROUP_ID }}
+        TG_USER_ID: ${{ secrets.TG_USER_ID }}
+        TG_USER_NAME: ${{ secrets.TG_USER_NAME }}
+        LOW_RATE: ${{ secrets.LOW_RATE }}
+        HIGH_RATE: ${{ secrets.HIGH_RATE }}
+      run: |
+        python main.py
