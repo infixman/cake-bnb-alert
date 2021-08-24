@@ -81,9 +81,9 @@ def main():
                 msg = f"CAKE/BNB 價格比 {cakebnb} ({cake}/{bnb})"
 
                 if cakebnb <= LOW_RATE:
-                    msg = "{msg}\r\n建議加倉"
+                    msg = f"{msg}\r\n建議加倉"
                 elif cakebnb >= HIGH_RATE:
-                    msg = "{msg}\r\n建議平倉"
+                    msg = f"{msg}\r\n建議平倉"
 
                 if cakebnb <= LOW_RATE or cakebnb >= HIGH_RATE:
                     send_msg(
