@@ -30,6 +30,7 @@ jobs:
         TG_GROUP_ID: ${{ secrets.TG_GROUP_ID }}
         TG_USER_ID: ${{ secrets.TG_USER_ID }}
         TG_USER_NAME: ${{ secrets.TG_USER_NAME }}
+        EMERGENCY_RATE: ${{ secrets.EMERGENCY_RATE }}
         LOW_RATE: ${{ secrets.LOW_RATE }}
         HIGH_RATE: ${{ secrets.HIGH_RATE }}
       run: |

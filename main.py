@@ -12,6 +12,7 @@ TG_DEBUG_GROUP_ID = os.getenv("TG_DEBUG_GROUP_ID")
 TG_GROUP_ID = os.getenv("TG_GROUP_ID")
 TG_USER_ID = os.getenv("TG_USER_ID")
 TG_USER_NAME = os.getenv("TG_USER_NAME")
+EMERGENCY_RATE = float(os.getenv("EMERGENCY_RATE"))
 LOW_RATE = float(os.getenv("LOW_RATE"))
 HIGH_RATE = float(os.getenv("HIGH_RATE"))
 SLEEP_SCEONDS = 5
@@ -79,11 +80,12 @@ def main():
             cake, bnb, cakebnb = get_cakebnb()
             if cake != -1 and bnb != -1:
                 msg = f"CAKE/BNB 價格比 {cakebnb} ({cake}/{bnb})"
-
-                if cakebnb <= LOW_RATE:
+                if cakebnb <= EMERGENCY_RATE:
+                    msg = f"{msg}\r\n建議平倉止損"
+                elif cakebnb <= LOW_RATE:
                     msg = f"{msg}\r\n建議加倉"
                 elif cakebnb >= HIGH_RATE:
-                    msg = f"{msg}\r\n建議平倉"
+                    msg = f"{msg}\r\n建議平倉獲利"
 
                 if cakebnb <= LOW_RATE or cakebnb >= HIGH_RATE:
                     send_msg(
