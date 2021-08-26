@@ -16,7 +16,7 @@ EMERGENCY_RATE = float(os.getenv("EMERGENCY_RATE"))
 LOW_RATE = float(os.getenv("LOW_RATE"))
 HIGH_RATE = float(os.getenv("HIGH_RATE"))
 SLEEP_SCEONDS = 5
-SEND_ENV = False
+SEND_ENV = os.getenv("SEND_ENV") == "True"
 
 
 def get_cakebnb():
